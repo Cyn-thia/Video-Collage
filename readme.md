@@ -54,7 +54,6 @@ The functionality will then be divided into two separate lists: MPV and PostMVP.
 - save each video
 - delete and rerecord video
 - play videos simultaneously
-- save full video to phone
 
 
 #### PostMVP 
@@ -62,6 +61,7 @@ The functionality will then be divided into two separate lists: MPV and PostMVP.
 - Change length of video
 - Change layout of video - select from a list of layouts
 - Edit start time of video
+- save full video to phone
 - Have multiple devices collaborate on one video 
 
 
