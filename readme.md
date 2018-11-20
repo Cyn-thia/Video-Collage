@@ -105,7 +105,7 @@ Time frames are also key in the development cycle.  You have limited time to cod
 | Video layouts screen| L | 5hrs | hrs | hrs |
 | Select a different layout| L | 8hrs | hrs | hrs |
 | Project Management| L | 3hrs | hrs | hrs |
-| Total |  | hrs| hrs | hrs |
+| Total |  | 69 hrs| hrs | hrs |
 
 
 ## Helper Functions
