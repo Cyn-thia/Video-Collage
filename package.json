@@ -13,7 +13,7 @@
     "moment": "^2.22.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
-    "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera",
+    "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
     "react-native-elements": "^0.19.1",
     "react-native-swipe-cards": "^0.1.1",
     "react-navigation": "^2.18.2"
