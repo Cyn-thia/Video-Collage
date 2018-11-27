@@ -40,9 +40,20 @@ export default class Cam extends React.Component {
     recVid = () => {
       if (this.camera) {
         this.camera.recordAsync({ maxDuration: 100000, mute: false })
-          .then(response => { this.uploadVidAsync(response) })
+          .then(response => { this.uploadVidAsync(response) });
         // this.props.currentVid = response.uri
       }
+      // else {() => { this.stopRecording() } }
+      // this.setState({
+      //   record: this.state.record === 'Record'
+      //     ? 'Stop Recording'
+      //     : 'Record'
+      // });
+    }
+
+    stopRecording = (response) => {
+      this.camera.stopRecording();
+      this.camera.pausePreview()
     }
 
     uploadVidAsync = async (photo) => {
@@ -87,16 +98,28 @@ export default class Cam extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            flex: .5,
+            flex: .2,
             alignSelf: 'flex-end',
             alignItems: 'center',
           }}
           onPress={ this.recVid }
-
           >
           <Text
             style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-            {this.state.record}
+            Record
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            flex: .2,
+            alignSelf: 'flex-end',
+            alignItems: 'center',
+          }}
+          onPress={ this.stopRecording }
+          >
+          <Text
+            style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+            Stop
           </Text>
         </TouchableOpacity>
       </View>
@@ -142,9 +165,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'transparent',
     flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   flipButton: {
-    flex: 0.1,
+    flex: .2,
     alignSelf: 'flex-end',
     alignItems: 'center',
   }

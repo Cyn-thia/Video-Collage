@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import Cam from './Camera'
 import { Video } from 'expo'
 
@@ -10,7 +10,12 @@ export default class Collage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text > yay collage!</Text>
+        <View style={styles.topBar}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Layouts')}>
+            <Text style={styles.backButton}> Back </Text>
+          </TouchableOpacity>
+        </View>
+        <Text> yay collage!</Text>
         <Video
           source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/video-collage-f93f5.appspot.com/o/file%3A%2Fdata%2Fuser%2F0%2Fhost.exp.exponent%2Fcache%2FExperienceData%2F%252540anonymous%25252FProject-4-654a6ef7-c827-4005-b901-bcd95ed4cf40%2FCamera%2F80268bd0-353d-4b03-842d-130eb66dbc27.mp4?alt=media&token=4eee3848-6a6b-4965-ac48-74c2427dc322' }}
           rate={1.0}
@@ -37,6 +42,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#B2DFDB',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  topBar: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    marginTop: 40,
+  },
+  backButton: {
+    color: "#00BFA5",
+    flex: 0.2,
   }
 })
 
