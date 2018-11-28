@@ -2,15 +2,15 @@ const db = require('../db/config');
 const Model = {};
 
 // for saving a new video
-Model.create = users => {
+Model.create = videos => {
   return db.one(
     `
     INSERT INTO videos
-    (fild_name)
-    VALUES ($1)
+    (collage_id, position, file_name)
+    VALUES ($1, $2, $3)
     RETURNING *
   `,
-    [users.file_name]
+    [videos.collage_id, videos.position, videos.file_name]
   );
 };
 

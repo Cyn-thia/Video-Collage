@@ -1,17 +1,17 @@
-\c finstadb;
+\c video_db;
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS collages;
 CREATE TABLE collages (
   collage_id SERIAL PRIMARY KEY,
-  layout INT,
+  layout INT
 );
 
-DROP TABLE IF EXISTS pictures;
+DROP TABLE IF EXISTS videos;
 CREATE TABLE videos (
   video_id SERIAL PRIMARY KEY,
   collage_id INT NOT NULL,
   position INT,
-  file_name VARCHAR(255),
+  file_name VARCHAR(255)
 );
 
 INSERT INTO videos VALUES (1, 1, 1,'file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FProject-4-654a6ef7-c827-4005-b901-bcd95ed4cf40/Camera/2fabbdac-1535-47b4-9b93-bbf193389fd9.mp4');

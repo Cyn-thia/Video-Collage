@@ -1,0 +1,31 @@
+{
+  "name": "project3-instagram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "cd client && expo start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.generalassemb.ly/cynthia/Project-4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cor": "0.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "image-downloader": "^3.4.1",
+    "morgan": "^1.9.1",
+    "pg-promise": "^8.5.1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.18.6"
+  }
+}

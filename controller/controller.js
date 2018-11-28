@@ -4,6 +4,8 @@ const controller = {};
 //saving a recorded rideo
 controller.recVideo = (req, res) => {
   Model.create({
+    collage_id: req.body.collage_id,
+    position: req.body.position,
     file_name: req.body.file_name,
   })
   .then(obj => {
@@ -21,7 +23,7 @@ controller.show = (req, res) => {
   Model.showCollage(req.params.id)
     .then(obj => {
       res.json({
-        message:'got new collage'
+        message:'got new collage',
         data: obj,
       });
     }).catch(err => {
