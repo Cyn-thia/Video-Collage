@@ -41,8 +41,9 @@ export default class Cam extends React.Component {
       if (this.camera) {
         this.camera.recordAsync({ maxDuration: 100000, mute: false })
           .then(response => { this.uploadVidAsync(response) });
-        // this.props.currentVid = response.uri
+
       }
+
       // else {() => { this.stopRecording() } }
       // this.setState({
       //   record: this.state.record === 'Record'
@@ -56,18 +57,24 @@ export default class Cam extends React.Component {
       this.camera.pausePreview()
     }
 
-    uploadVidAsync = async (photo) => {
-      const response = await `${photo.uri}`;
+    uploadVidAsync = async (video) => {
+      const response = await `${video.uri}`;
       // console.log(response.slice(132, 200))
       console.log('this is response',response)
       const blob = await new Blob([response], { type: `video/mp4` });
       console.log('this is blob',blob)
-      var vidRef = await storageRef.child(photo.uri);
+      var vidRef = await storageRef.child(video.uri);
       const snapshot = await vidRef.put(blob);
       console.log('sanity check')
       let vidUrl = snapshot.metadata.contentDisposition
       shortUrl = vidUrl.slice(28)
       return snapshot.downloadURL;
+    }
+
+    timer = () => {
+      let timer = 0
+      setInterval(timer + 1, 1000)
+      return timer
     }
 
     renderTopBar = () =>
