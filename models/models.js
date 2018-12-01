@@ -14,6 +14,19 @@ Model.create = videos => {
   );
 };
 
+//posting a new collage
+Model.layout = collages => {
+  return db.one(
+    `
+    INSERT INTO collages
+    (layout)
+    VALUES ($1)
+    RETURNING *
+  `,
+    [collages.layout]
+  );
+};
+
 // gets videos for a collage
 Model.showCollage = id => {
   return db.query(

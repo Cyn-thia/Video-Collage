@@ -6,11 +6,26 @@ controller.recVideo = (req, res) => {
   Model.create({
     collage_id: req.body.collage_id,
     position: req.body.position,
-    file_name: req.body.file_name,
+    file_name: req.body.file_name
   })
   .then(obj => {
     res.json({
       message:'new video saved!',
+      data: obj,
+    });
+  }).catch(err => {
+    res.status(500).json(err);
+  });
+}
+
+//posting a new collage
+controller.layout = (req, res) => {
+  Model.layout({
+    layout: req.body.layout
+  })
+  .then(obj => {
+    res.json({
+      message:'yay new collage!',
       data: obj,
     });
   }).catch(err => {

@@ -9,7 +9,7 @@ export default class Vid extends React.Component {
           apiDataLoaded: true,
           apiData: this.props.video
         })
-        console.log('this is my prop', this.props.video.position)
+        console.log('this is my position in Vid', this.props.video.position)
   }
 
   render(){

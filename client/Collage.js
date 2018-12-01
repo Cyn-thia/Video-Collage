@@ -26,16 +26,28 @@ export default class Collage extends React.Component {
     currentVid: '',
     apiDataLoaded: false,
     apiData: null,
+    collage_id: '',
+    position: 2,
   }
 
   componentDidMount() {
-      axios.get(`http://173.2.1.190:3001/collage/3`)
-      .then( res => {
-        this.setState(prevState => ({
-          apiDataLoaded: true,
-          apiData: res.data.data
-        }))
-        // console.log('this is my log', Object.keys(res.data.data))
+    axios.get(`http://173.2.1.190:3001/collage/7`)
+    .then( res => {
+      this.setState({
+        apiDataLoaded: true,
+        apiData: res.data.data,
+        collage_id: this.props.navigation.getParam('collage_id')
+      })
+      // console.log('this is my log', Object.keys(res.data.data))
+      console.log('this.props in collage',this.props.navigation.getParam('collage_id'))
+    })
+  }
+
+  renderCollage() {
+    return this.state.apiData.map(d => {
+        return(
+          <Vid key={d.video_id} video={d} />
+        )
       })
   }
 
@@ -49,10 +61,17 @@ export default class Collage extends React.Component {
     } else return <Text>Loading...</Text>
   }
 
+  // selectPosition(){
+  //   this.setState({
+  //     position:
+  //   })
+  // }
+
   render() {
+     console.log('passed from camera', this.props.navigation.getParam('file_name'))
     let vid;
     storageRef.child('file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FProject-4-654a6ef7-c827-4005-b901-bcd95ed4cf40/Camera/2dea1104-c5d1-40aa-8d3b-087fc6325df4.mp4').getDownloadURL().then(function(url) {
-    console.log('this is url',url)
+    // console.log('this is url', url)
     return vid = url
   })
 
@@ -60,14 +79,17 @@ export default class Collage extends React.Component {
       <View style={styles.container}>
         <View style={styles.topBar}>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Layouts')}>
-              <Text style={styles.backButton}> Back </Text>
+            <Text style={styles.backButton}>Back</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.title}> yay collage!</Text>
+        <Text style={styles.title}>yay collage!</Text>
         <View style={styles.videoContainer}>
             {this.renderVideos()}
-          </View>
-        <Button title='Go to Camera' onPress={() => this.props.navigation.navigate('Cam', {currentVid: this.state.currentVid})}/>
+        </View>
+        <Button
+        title='Go to Camera'
+        onPress={() => this.props.navigation.navigate('Cam',
+          {position: this.state.position, collage_id: this.state.collage_id})}/>
       </View>
     )
   }
