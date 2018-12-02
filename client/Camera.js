@@ -45,7 +45,7 @@ export default class Cam extends React.Component {
     if (this.camera) {
       this.camera.recordAsync({ maxDuration: 100000, mute: false })
         .then(async response => {
-          // console.log('this is response', response.uri)
+          console.log('this is response', response.uri)
           const file_name = response.uri
           // this.uploadVidAsync(response),
           await this.setState(prevState => ({

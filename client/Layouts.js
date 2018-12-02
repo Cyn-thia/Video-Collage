@@ -19,7 +19,7 @@ export default class Layouts extends React.Component{
     apiDataLoaded:null,
     apiData:[],
     layout: '',
-    collage_id: '',
+    collage_id: 9,
   }
 
   selectLayout = async (e) => {
@@ -76,7 +76,7 @@ export default class Layouts extends React.Component{
   render(){
     return(
       <View style={styles.container}>
-        <Text style={styles.title}>Layouts!</Text>
+        <Text style={styles.title}>select a layout</Text>
         <View style={styles.body}>
           <View style={styles.boxContainer}>
             <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
@@ -105,10 +105,6 @@ export default class Layouts extends React.Component{
             </TouchableHighlight>
           </View>
         </View>
-        <Button
-          title="Select this layout"
-          onPress={this.selectLayout}
-        />
       </View>
       )
   }
@@ -122,7 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title:{
-    fontSize: 50,
+    fontSize: 20,
     color: "#00BFA5",
   },
   body:{

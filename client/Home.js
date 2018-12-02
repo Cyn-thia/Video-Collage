@@ -14,10 +14,15 @@ export default class Home extends React.Component {
   render() {
     setTimeout(() => {
       this.props.navigation.navigate('Layouts')
-    }, 1000);
+    }, 6000);
     return(
       <View style={styles.container}>
-        <Text style={styles.splash}>Splash!</Text>
+          <Image
+            source={require("./assets/coollogo_com-26292471.png")}
+            style={styles.splash} />
+          <Image
+            source={require("./assets/loader-alt.gif")}
+            style={styles.gif} />
       </View>
     )
   }
@@ -26,21 +31,19 @@ export default class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#B2DFDB',
-    alignItems: 'center',
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   splash: {
-    fontSize: 50,
-    color: "#00BFA5",
+    zIndex: 5,
+    marginTop: 100,
+    resizeMode: 'contain',
+    width: Dimensions.get("window").width - 100,
   },
-  ImageBackground: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
+  gif: {
+    resizeMode: 'contain',
+    width: Dimensions.get("window").width + 200
   },
-  logo: {
-    height: 300,
-    width: Dimensions.get("window").width,
-    justifyContent: 'center',
-  }
 });

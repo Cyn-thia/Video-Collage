@@ -31,7 +31,7 @@ export default class Collage extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://173.2.1.190:3001/collage/7`)
+    axios.get(`http://173.2.1.190:3001/collage/9`)
     .then( res => {
       this.setState({
         apiDataLoaded: true,
@@ -41,14 +41,6 @@ export default class Collage extends React.Component {
       // console.log('this is my log', Object.keys(res.data.data))
       console.log('this.props in collage',this.props.navigation.getParam('collage_id'))
     })
-  }
-
-  renderCollage() {
-    return this.state.apiData.map(d => {
-        return(
-          <Vid key={d.video_id} video={d} />
-        )
-      })
   }
 
   renderVideos() {
@@ -68,7 +60,8 @@ export default class Collage extends React.Component {
   // }
 
   render() {
-     console.log('passed from camera', this.props.navigation.getParam('file_name'))
+    console.log('passed from camera', this.props.navigation.getParam('file_name'))
+    console.log('state', this.state.apiData)
     let vid;
     storageRef.child('file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FProject-4-654a6ef7-c827-4005-b901-bcd95ed4cf40/Camera/2dea1104-c5d1-40aa-8d3b-087fc6325df4.mp4').getDownloadURL().then(function(url) {
     // console.log('this is url', url)
@@ -82,9 +75,10 @@ export default class Collage extends React.Component {
             <Text style={styles.backButton}>Back</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.title}>yay collage!</Text>
+        <Text style={styles.title}></Text>
         <View style={styles.videoContainer}>
-            {this.renderVideos()}
+
+          {this.renderVideos()}
         </View>
         <Button
         title='Go to Camera'
@@ -98,7 +92,7 @@ export default class Collage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#B2DFDB',
+    backgroundColor: 'white',
     alignItems: 'center',
     borderWidth:2,
     borderColor: 'black',
@@ -119,10 +113,10 @@ const styles = StyleSheet.create({
   },
   videoContainer: {
     flexWrap: 'wrap',
-    width: 500,
     flexDirection: 'row',
     justifyContent:'center',
     margin: 10,
+    width: Dimensions.get("window").width
   },
   subVidContainer:{
     flexDirection: 'column',
