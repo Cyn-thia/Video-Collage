@@ -11,7 +11,7 @@ import {
   AsyncStorage,
   ReactNativeComponentTree } from 'react-native';
 import Collage from './Collage';
-import SwipeCards from './SwipeCards';
+// import Carousel from './Carousel';
 import axios from 'axios'
 
 export default class Layouts extends React.Component{
@@ -80,28 +80,44 @@ export default class Layouts extends React.Component{
         <View style={styles.body}>
           <View style={styles.boxContainer}>
             <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
-              <Image key="1" style={styles.box}></Image>
+              <Image
+                source={require("./assets/layout1.png")}
+                style={styles.box}></Image>
             </TouchableHighlight>
             <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
-              <Image style={styles.box}></Image>
+              <Image
+                source={require("./assets/layout3.png")}
+                style={styles.box}></Image>
             </TouchableHighlight>
             <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
-              <Image style={styles.box}></Image>
+              <Image
+                source={require("./assets/layout3.2.png")}
+                style={styles.box}></Image>
             </TouchableHighlight>
             <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
-              <Image style={styles.box}></Image>
+              <Image
+                source={require("./assets/layout4.1.png")}
+                style={styles.box}></Image>
             </TouchableHighlight>
             <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
-              <Image style={styles.box}></Image>
+              <Image
+                source={require("./assets/layout2.png")}
+                style={styles.box}></Image>
             </TouchableHighlight>
             <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
-              <Image style={styles.box}></Image>
+              <Image
+                source={require("./assets/layout3.1.png")}
+                style={styles.box}></Image>
             </TouchableHighlight>
             <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
-              <Image style={styles.box}></Image>
+              <Image
+                source={require("./assets/layout4.png")}
+                style={styles.box}></Image>
             </TouchableHighlight>
             <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
-              <Image style={styles.box}></Image>
+              <Image
+                source={require("./assets/layout4.2.png")}
+                style={styles.box}></Image>
             </TouchableHighlight>
           </View>
         </View>
@@ -118,7 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title:{
-    fontSize: 20,
+    fontSize: 30,
     color: "#00BFA5",
   },
   body:{
@@ -133,25 +149,13 @@ const styles = StyleSheet.create({
     borderWidth:2,
     borderColor: 'white',
   },
-  leftArrow:{
-    width: 50,
-    height: 50,
-    borderWidth:2,
-    borderColor: 'white',
-  },
-  rightArrow:{
-    width: 50,
-    height: 50,
-    borderWidth:2,
-    borderColor: 'white',
-  },
   box:{
     height: 100,
     width: 100,
     backgroundColor: '#E0F2F1',
     borderWidth:2,
     borderColor: 'white',
-    margin: 15,
+    margin: 25,
     alignItems: 'center',
   }
 })
