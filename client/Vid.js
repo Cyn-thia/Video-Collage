@@ -19,7 +19,7 @@ export default class Vid extends React.Component {
         rate={1.0}
         volume={1.0}
         isMuted={false}
-        resizeMode={Video.RESIZE_MODE_CONTAIN}
+        resizeMode='contain'
         shouldPlay
         isLooping
         style={styles.video}
@@ -31,10 +31,9 @@ export default class Vid extends React.Component {
 const styles = StyleSheet.create({
 
   video: {
-    width: Dimensions.get("window").width/2 - 2,
-    height: Dimensions.get("window").height/2 - 2,
-    borderWidth: 2,
-    borderColor: 'white',
-
+    width: Dimensions.get("window").width/2 - 8,
+    height: Dimensions.get("window").width/2 - 3,
+    borderTopWidth: 5,
+    borderColor: 'transparent'
   }
 })

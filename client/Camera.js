@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, Button, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Text, Button, StyleSheet, Dimensions, Image } from 'react-native'
 import { withNavigation } from 'react-navigation';
 import { Camera, Permissions, FileSystem } from 'expo';
 import * as Expo from "expo";
@@ -18,10 +18,10 @@ import axios from 'axios'
 // };
 // firebase.initializeApp(firebaseConfig)
 // Get a reference to the storage service, which is used to create references in your storage bucket
-var storage = firebase.storage();
+// var storage = firebase.storage();
 
 // Create a storage reference from our storage service
-var storageRef = storage.ref();
+// var storageRef = storage.ref();
 
 export default class Cam extends React.Component {
   state = {
@@ -29,42 +29,53 @@ export default class Cam extends React.Component {
     hasAudioPermission: null,
     type: Camera.Constants.Type.front,
     record: 'Record',
-    file_name:''
+    file_name:'',
+    ipAddress: ''
   }
 
   async componentDidMount() {
-    // console.log(this.props.navigation.getParam('collage_id'))
+    console.log('ipaddress',this.props.navigation.getParam('ipAddress'))
     const { status } = await Permissions.askAsync(Permissions.CAMERA, Permissions.AUDIO_RECORDING);
     this.setState({
       hasCameraPermission: status === 'granted',
-      hasAudioPermission: status === 'granted'
+      hasAudioPermission: status === 'granted',
+      ipAddress: this.props.navigation.getParam('ipAddress'),
+      collage_id: '',
     });
   }
+
+
 
   recVid = () => {
     if (this.camera) {
       this.camera.recordAsync({ maxDuration: 100000, mute: false })
         .then(async response => {
-          console.log('this is response', response.uri)
+          console.log('CAM this is response.uri', response.uri)
           const file_name = response.uri
           // this.uploadVidAsync(response),
           await this.setState(prevState => ({
             file_name:file_name,
+            collage_id:this.props.navigation.getParam('collage_id')
           }))
-          // console.log('this is state in Cam', this.state)
+          // console.log('CAM STATE after set file', this.state)
         })
         .then(() => {
           let collage_id = this.props.navigation.getParam('collage_id')
           let position = this.props.navigation.getParam('position')
           let file_name = this.state.file_name
-          axios.post(`http://173.2.1.190:3001/recVideo`, {
+          let ipAddress = this.props.navigation.getParam('ipAddress')
+          console.log('CAM state.file_name', this.state.file_name)
+
+          axios.post(`http://192.168.1.254:3001/recVideo`, {
             collage_id: collage_id,
             position: position,
             file_name: file_name
               })
            .then(data => this.props.navigation.navigate('Collage',
             { file_name: this.state.file_name,
-              collage_id: collage_id }))
+              collage_id: this.state.collage_id,
+              ipAddress: ipAddress }),
+           )
         })
 
       // else {() => { this.stopRecording() } }
@@ -78,13 +89,13 @@ export default class Cam extends React.Component {
 
   stopRecording = () => {
     this.camera.stopRecording();
-    this.camera.pausePreview()
+    this.camera.pausePreview();
   }
 
   uploadVidAsync = async (video) => {
     const response = await `${video.uri}`;
     // console.log(response.slice(132, 200))
-    console.log('this is response', response)
+    // console.log('this is response', response)
     const blob = await new Blob([response], { type: `video/mp4` });
     console.log('this is blob', blob)
     var vidRef = await storageRef.child(video.uri);
@@ -104,20 +115,14 @@ export default class Cam extends React.Component {
   renderTopBar = () =>
     <View style={styles.topBar}>
         <TouchableOpacity
-          style={styles.backButton}
+          style={styles.backTouch}
           onPress={() => { this.props.navigation.navigate('Collage') }}>
-          <Text
-            style={{ fontSize: 18, marginTop: 0, color: 'white' }}>
-            {' '}Back{' '}
-          </Text>
+          <Image
+            source={require('./assets/cancel-white.png')}
+            style={styles.xPic} />
         </TouchableOpacity>
-      </View>
-
-  renderBottomBar = () =>
-    <View
-        style={styles.bottomBar}>
         <TouchableOpacity
-          style={styles.flipButton}
+          style={styles.flipTouch}
           onPress={() => {
             this.setState({
               type: this.state.type === Camera.Constants.Type.back
@@ -125,41 +130,45 @@ export default class Cam extends React.Component {
                 : Camera.Constants.Type.back,
             });
           }}>
-          <Text
-            style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-            {' '}Flip{' '}
-          </Text>
+           <Image
+            source={require('./assets/flip-white.png')}
+            style={styles.flipPic} />
         </TouchableOpacity>
+      </View>
+
+  renderBottomBar = () =>
+    <View
+        style={styles.bottomBar}>
         <TouchableOpacity
-          style={{
-            flex: .2,
-            alignSelf: 'flex-end',
-            alignItems: 'center',
-          }}
+          style={styles.recordTouch}
           onPress={ this.recVid }
           >
-          <Text
-            style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+          <Text style={styles.recordText}>
             Record
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{
-            flex: .2,
-            alignSelf: 'flex-end',
-            alignItems: 'center',
-          }}
+          style={styles.camTouch}
+          onPress={ this.recVid }>
+          <Image
+            source={require('./assets/camcorder.png')}
+            style={styles.cam} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.stopTouch}
           onPress={ this.stopRecording }
           >
-          <Text
-            style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+          <Text style={styles.stopText}>
             Stop
           </Text>
         </TouchableOpacity>
       </View>
 
-
   render() {
+    console.log('CAM POSITOPN passed from collage', this.props.navigation.getParam('position'))
+    console.log('CAM COLLAGEID passed from collage', this.props.navigation.getParam('collage_id'))
+    console.log('CAM ip passed from collage', this.props.navigation.getParam('ipAddress'))
+
 
     if (this.state.hasCameraPermission === null) {
       return <View />;
@@ -167,47 +176,111 @@ export default class Cam extends React.Component {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} type={this.state.type}
+        <View style={{ flex: 1, backgroundColor: 'black'}}>
+          {this.renderTopBar()}
+          <Camera
+            style={ styles.camera }
+            type={this.state.type}
             ref={ref => { this.camera = ref; }}>
-            {this.renderTopBar()}
-            {this.renderBottomBar()}
           </Camera>
+          {this.renderBottomBar()}
         </View>
       );
     }
   }
-
 }
 
 const styles = StyleSheet.create({
-  topBar: {
-    flex: 0.1,
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
+  camera: {
+    height: Dimensions.get("window").height-200,
+
   },
-  backButton: {
-    flex: 0.2,
-    alignSelf: 'flex-end',
+  // gradient: {
+  //   position: 'absolute',
+  //   width: Dimensions.get("window").width,
+  //   height: Dimensions.get("window").height,
+
+  // },
+  topBar: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
     alignItems: 'center',
-    fontSize: 18,
-    marginTop: 0,
-    color: 'white'
+    paddingTop:50,
+    // borderWidth:1,
+    // borderColor:'red'
+  },
+  backTouch:{
+    flex:1,
+    alignItems:'flex-start',
+    justifyContent:'center',
+    padding: 15,
+  },
+  xPic: {
+    resizeMode: 'contain',
+    height: 25,
+    width: 25,
+  },
+  flipTouch: {
+    flex:1,
+    height: 50,
+    width: 50,
+    alignItems:'flex-end',
+    justifyContent:'center',
+    padding: 15,
+  },
+  flipPic: {
+    resizeMode: 'contain',
+    height: 40,
+    width: 40,
   },
   bottomBar: {
     flex: 1,
     backgroundColor: 'transparent',
-    flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20,
-  },
-  flipButton: {
-    flex: .2,
-    alignSelf: 'flex-end',
+    flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'white'
+    paddingBottom:50,
+    // borderWidth:1,
+    // borderColor:'blue'
+  },
+  recordTouch:{
+    flex: 1,
+    alignItems: 'center',
+    // borderWidth:1,
+    // borderColor:'red'
+  },
+  recordText:{
+    fontSize: 18,
+    color: 'white',
+    // borderWidth:1,
+    // borderColor:'blue'
+  },
+  camTouch:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth:3,
+    borderColor: 'white',
+    borderRadius: 100,
+    height: 75,
+    width: 75,
+  },
+  cam:{
+    resizeMode: 'contain',
+    width: 30,
+    height: 30,
+  },
+  stopTouch:{
+    flex: 1,
+    alignItems: 'center',
+    // borderWidth:1,
+    // borderColor:'red'
+  },
+  stopText:{
+    fontSize: 18,
+    color: 'white',
+    // borderWidth:1,
+    // borderColor:'blue'
   }
 })

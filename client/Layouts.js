@@ -20,7 +20,8 @@ export default class Layouts extends React.Component{
     apiDataLoaded:null,
     apiData:[],
     layout: '',
-    collage_id: 9,
+    collage_id: 12,
+    ipAddress: '192.168.1.254',
   }
 
   selectLayout = async (e) => {
@@ -29,11 +30,14 @@ export default class Layouts extends React.Component{
         layout: layout
       })
     // this.storeData()
-    this.props.navigation.navigate('Collage', { collage_id: this.state.collage_id })
+    this.props.navigation.navigate('Collage',
+      { collage_id: this.state.collage_id,
+        layout: this.state.layout,
+        ipAddress: this.state.ipAddress })
   }
 
   storeData = () => {
-    axios.post(`http://173.2.1.190:3001/layout`, {
+    axios.post(`http://${this.state.ipAddress}:3001/layout`, {
       layout: this.state.layout
     })
     console.log('STATE',this.state)
