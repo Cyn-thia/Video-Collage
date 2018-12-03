@@ -7,6 +7,7 @@ import {
   Image,
   Dimensions,
   TouchableHighlight,
+  TouchableOpacity,
   TouchableNativeFeedback,
   AsyncStorage,
   ReactNativeComponentTree } from 'react-native';
@@ -79,46 +80,46 @@ export default class Layouts extends React.Component{
         <Text style={styles.title}>select a layout</Text>
         <View style={styles.body}>
           <View style={styles.boxContainer}>
-            <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
+            <TouchableOpacity onPress={(e) => this.selectLayout(e)}>
               <Image
                 source={require("./assets/layout1.png")}
                 style={styles.box}></Image>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={(e) => this.selectLayout(e)}>
               <Image
                 source={require("./assets/layout3.png")}
                 style={styles.box}></Image>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={(e) => this.selectLayout(e)}>
               <Image
                 source={require("./assets/layout3.2.png")}
                 style={styles.box}></Image>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={(e) => this.selectLayout(e)}>
               <Image
                 source={require("./assets/layout4.1.png")}
                 style={styles.box}></Image>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={(e) => this.selectLayout(e)}>
               <Image
                 source={require("./assets/layout2.png")}
                 style={styles.box}></Image>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={(e) => this.selectLayout(e)}>
               <Image
                 source={require("./assets/layout3.1.png")}
                 style={styles.box}></Image>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={(e) => this.selectLayout(e)}>
               <Image
                 source={require("./assets/layout4.png")}
                 style={styles.box}></Image>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={(e) => this.selectLayout(e)}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={(e) => this.selectLayout(e)}>
               <Image
                 source={require("./assets/layout4.2.png")}
                 style={styles.box}></Image>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -129,7 +130,6 @@ export default class Layouts extends React.Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#B2DFDB',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   boxContainer:{
+    flexWrap:'wrap',
     height: Dimensions.get("window").height - 200,
-    flexWrap: 'wrap',
     justifyContent: 'center',
     borderWidth:2,
     borderColor: 'white',

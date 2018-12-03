@@ -200,11 +200,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'transparent',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    padding: 20,
   },
   flipButton: {
     flex: .2,
     alignSelf: 'flex-end',
     alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'white'
   }
 })

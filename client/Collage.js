@@ -70,6 +70,10 @@ export default class Collage extends React.Component {
 
     return (
       <View style={styles.container}>
+      <Expo.LinearGradient
+        style={styles.gradient}
+        colors={['#08e6a6', "#05edfe", "#4ba5f2"]}>
+      </Expo.LinearGradient>
         <View style={styles.topBar}>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Layouts')}>
             <Text style={styles.backButton}>Back</Text>
@@ -77,13 +81,30 @@ export default class Collage extends React.Component {
         </View>
         <Text style={styles.title}></Text>
         <View style={styles.videoContainer}>
-
-          {this.renderVideos()}
+          <View style={styles.box1}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Cam',
+                      {position: this.state.position, collage_id: this.state.collage_id})}>
+              <Text style={styles.plusSign}>+</Text>
+            </TouchableOpacity>
+          </View>
+            <View style={styles.subContainer}>
+              <View style={styles.box2}>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('Cam',
+                          {position: this.state.position, collage_id: this.state.collage_id})}>
+                  <Text style={styles.plusSign}>+</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.box3}>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('Cam',
+                          {position: this.state.position, collage_id: this.state.collage_id})}>
+                  <Text style={styles.plusSign}>+</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
         </View>
-        <Button
-        title='Go to Camera'
-        onPress={() => this.props.navigation.navigate('Cam',
-          {position: this.state.position, collage_id: this.state.collage_id})}/>
       </View>
     )
   }
@@ -94,13 +115,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
-    borderWidth:2,
-    borderColor: 'black',
+  },
+  gradient: {
+    position: 'absolute',
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+    opacity: .3,
   },
   topBar: {
     backgroundColor: 'transparent',
     flexDirection: 'row',
     width: Dimensions.get("window").width,
+    padding: 20,
   },
   backButton: {
     color: "#00BFA5",
@@ -112,13 +138,51 @@ const styles = StyleSheet.create({
     color: "#00BFA5",
   },
   videoContainer: {
-    flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent:'center',
     margin: 10,
-    width: Dimensions.get("window").width
+    width: Dimensions.get("window").width-20,
+    padding: 20,
+
   },
-  subVidContainer:{
+  subContainer: {
     flexDirection: 'column',
   },
+  box1:{
+    width: Dimensions.get("window").width/2 - 8,
+    height: Dimensions.get("window").width,
+    borderWidth: 10,
+    borderColor: 'white',
+    alignItems: 'center',
+    justifyContent:'center',
+  },
+  box2:{
+    width: Dimensions.get("window").width/2 - 8,
+    height: Dimensions.get("window").width/2,
+    borderTopWidth: 10,
+    borderRightWidth: 10,
+    borderBottomWidth: 10,
+    borderColor: 'white',
+    alignItems: 'center',
+    justifyContent:'center',
+  },
+  box3:{
+    width: Dimensions.get("window").width/2 - 8,
+    height: Dimensions.get("window").width/2,
+    borderRightWidth: 10,
+    borderBottomWidth: 10,
+    borderColor: 'white',
+    alignItems: 'center',
+    justifyContent:'center',
+  },
+  plusSign:{
+    fontSize: 150,
+    color: 'white',
+    textAlignVertical: 'center',
+    includeFontPadding: false,
+    padding: 0,
+    alignItems: 'center',
+    justifyContent:'center',
+    textAlign: 'center',
+    }
 })
