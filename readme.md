@@ -13,12 +13,12 @@ You are **responsible** for scheduling time with your squad to seek approval for
 |:---:|---|---|:---:|
 |Day 1| Nov 19 | Prject Worksheet, Wireframes, Priority Matrix, User Stories, Determine Functional Components | Complete
 |Day 2| Nov 20 | Projetct Approval | Complete
-|Day 3 - 7| Nov 21-25 | App, render camera, take a video,Save each video, replay video | Complete
-|Day 8| Nov 26 | Delete video, retake video | In Progress
+|Day 3 - 7| Nov 21-25 | App, render camera, take a video | Complete
+|Day 8| Nov 26 | Save each video, replay video | Complete
 |Day 9| Nov 27 | Play multiple videos | Complete
-|Day 10| Nov 28 | VideoContainer, CSS | In Progress
-|Day 11| Nov 29 | Final CSS touches | Incomplete
-|Day 12 - 14| Nov 30 - Dec 2 | Possibly Post-MVP | Incomplete
+|Day 10| Nov 28 | VideoContainer, CSS | Complete
+|Day 11| Nov 29 | Continue CSS touches | Complete
+|Day 12 - 14| Nov 30 - Dec 2 | Finish CSS, Possibly Post-MVP | Complete
 |Day 15| Dec 3 | Present | Incomplete
 
 
@@ -29,6 +29,7 @@ Use this section to describe your final project and perhaps any links to relevan
 Video collage inspired by the Acapella app. The user will be able to record multiple 10 second videos and play them all at the same time as a collage and save to the camera roll.
 
 [Expo Video Documentation](https://docs.expo.io/versions/latest/sdk/video)
+[Inspiration video](https://www.youtube.com/watch?v=2mjvfnUAfyo)
 
 ## Wireframes
 
@@ -52,12 +53,12 @@ The functionality will then be divided into two separate lists: MPV and PostMVP.
 
 - record 4 videos
 - save each video
-- delete and rerecord video
 - play videos simultaneously
 
 
 #### PostMVP 
 
+- delete and rerecord video
 - Change length of video
 - Change layout of video - select from a list of layouts
 - Edit start time of video
@@ -93,19 +94,19 @@ Time frames are also key in the development cycle.  You have limited time to cod
 | --- | :---: |  :---: | :---: | :---: |
 | Wireframing| H | 5hrs | 5hrs | 5hrs |
 | App | H | 2hrs | 0.5hrs | 0.5hrs |
-| Spash Page | H | 1hrs| hrs | hrs |
-| VideoContainer | H | 5hrs | hrs | hrs |
+| Spash Page | H | 1hrs| 2hrs | 2hrs |
+| VideoContainer | H | 5hrs | 6hrs | 6hrs |
 | Rednering Camera | H | 4hrs | 4hrs | 4hrs |
 | Recording Video | H | 6hrs | 4hrs | 4hrs |
-| Saving Each Video | H | 4hrs| 10hrs | hrs |
+| Saving Each Video | H | 4hrs| 10hrs | 10hrs |
 | Playing Multiple Videos | H | 10hrs| 3hrs | 3hrs |
-| Delete Videos | H | 3hrs| hrs | hrs |
-| CSS| H | 8hrs | 8hrs | hrs |
-| Change length of video | L | 8hrs | hrs | hrs |
-| Video layouts screen| L | 5hrs | 5hrs | hrs |
-| Select a different layout| L | 8hrs | hrs | hrs |
+| Delete Videos | L | 3hrs| 0hrs | 0hrs |
+| CSS| H | 8hrs | 12hrs | 12hrs |
+| Change length of video | L | 8hrs | 0hrs | 0hrs |
+| Video layouts screen| L | 5hrs | 5hrs | 5hrs |
+| Select a different layout| L | 8hrs | 0hrs | 0hrs |
 | Project Management| L | 3hrs | 3hrs | 3hrs |
-| Total |  | 69 hrs| 42.5hrs | hrs |
+| Total |  | 69 hrs| 58.5hrs | 58.5hrs |
 
 
 ## Helper Functions
@@ -114,7 +115,7 @@ Helper functions should be generic enought that they can be reused in other appl
 | Function | Description | 
 | --- | --- |  
 | compondentDidMount | Pulling data when page renders | 
-| Capitalize | This will capitalize the first letter in a string of text | 
+| Timer | timer continuously increasing each second | 
 
 ## Additional Libraries
  Use this section to list all supporting libraries and thier role in the project. 
