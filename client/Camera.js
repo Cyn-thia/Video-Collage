@@ -30,7 +30,8 @@ export default class Cam extends React.Component {
     type: Camera.Constants.Type.front,
     record: 'Record',
     file_name:'',
-    ipAddress: ''
+    ipAddress: '',
+    timer: 0,
   }
 
   async componentDidMount() {
@@ -42,6 +43,7 @@ export default class Cam extends React.Component {
       ipAddress: this.props.navigation.getParam('ipAddress'),
       collage_id: '',
     });
+    setInterval(() => this.timer(), 1000);
   }
 
 
@@ -106,21 +108,22 @@ export default class Cam extends React.Component {
     return snapshot.downloadURL;
   }
 
-  timer = () => {
-    let timer = 0
-    setInterval(timer + 1, 1000)
-    return timer
-  }
+  timer() {
+    this.setState({
+    timer: this.state.timer + 1
+  })
+    }
 
   renderTopBar = () =>
     <View style={styles.topBar}>
         <TouchableOpacity
-          style={styles.backTouch}
+          style={styles.xTouch}
           onPress={() => { this.props.navigation.navigate('Collage') }}>
           <Image
             source={require('./assets/cancel-white.png')}
             style={styles.xPic} />
         </TouchableOpacity>
+        <Text style={styles.timer}>{this.state.timer}</Text>
         <TouchableOpacity
           style={styles.flipTouch}
           onPress={() => {
@@ -211,23 +214,28 @@ const styles = StyleSheet.create({
     // borderWidth:1,
     // borderColor:'red'
   },
-  backTouch:{
+  xTouch:{
     flex:1,
-    alignItems:'flex-start',
-    justifyContent:'center',
+    alignItems:'center',
     padding: 15,
+
   },
   xPic: {
     resizeMode: 'contain',
     height: 25,
     width: 25,
   },
+  timer:{
+    flex: 2,
+    textAlign:'center',
+    fontSize: 18,
+    color: 'white',
+  },
   flipTouch: {
     flex:1,
     height: 50,
     width: 50,
-    alignItems:'flex-end',
-    justifyContent:'center',
+    alignItems:'center',
     padding: 15,
   },
   flipPic: {
@@ -235,6 +243,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
   },
+
   bottomBar: {
     flex: 1,
     backgroundColor: 'transparent',
