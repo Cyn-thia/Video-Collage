@@ -35,7 +35,7 @@ export default class Collage extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://${this.props.navigation.getParam('ipAddress')}:3001/collage/12`)
+    axios.get(`http://${this.props.navigation.getParam('ipAddress')}:3001/collage/14`)
     .then( res => {
       this.setState({
         apiDataLoaded: true,

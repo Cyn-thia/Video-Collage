@@ -20,8 +20,8 @@ export default class Layouts extends React.Component{
     apiDataLoaded:null,
     apiData:[],
     layout: '',
-    collage_id: 12,
-    ipAddress: '192.168.1.254',
+    collage_id: 14,
+    ipAddress: '173.2.1.190',
   }
 
   selectLayout = async (e) => {
@@ -41,15 +41,15 @@ export default class Layouts extends React.Component{
       layout: this.state.layout
     })
     console.log('STATE',this.state)
-    // .then(res =>
+    .then(res =>
       this.setState({
         apiDataLoaded: true,
         apiData: res.data.data,
         collage_id: res.data.data.collage_id,
     //     layout: e.target
-      })
-
-    // )
+      }),
+    )
+      console.log('after post STATE',this.state)
 
    // .then(data => this.props.navigation.navigate('Collage',
    //  {collage_id: collage_id }))
@@ -148,14 +148,14 @@ const styles = StyleSheet.create({
   },
   boxContainer:{
     flexWrap:'wrap',
-    height: Dimensions.get("window").height - 200,
+    height: Dimensions.get("window").height*.8,
     justifyContent: 'center',
-    borderWidth:2,
-    borderColor: 'white',
+    // borderWidth:2,
+    // borderColor: 'black',
   },
   box:{
-    height: 100,
-    width: 100,
+    height: Dimensions.get("window").height*.8*(2/13),
+    width: Dimensions.get("window").height*.8*(2/13),
     backgroundColor: '#E0F2F1',
     borderWidth:2,
     borderColor: 'white',

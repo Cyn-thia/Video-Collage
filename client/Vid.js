@@ -19,7 +19,7 @@ export default class Vid extends React.Component {
         rate={1.0}
         volume={1.0}
         isMuted={false}
-        resizeMode='contain'
+        resizeMode="cover"
         shouldPlay
         isLooping
         style={styles.video}

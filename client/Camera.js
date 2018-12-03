@@ -43,14 +43,13 @@ export default class Cam extends React.Component {
       ipAddress: this.props.navigation.getParam('ipAddress'),
       collage_id: '',
     });
-    setInterval(() => this.timer(), 1000);
   }
 
 
 
   recVid = () => {
     if (this.camera) {
-      this.camera.recordAsync({ maxDuration: 100000, mute: false })
+      this.camera.recordAsync({ maxDuration: 6000, mute: false })
         .then(async response => {
           console.log('CAM this is response.uri', response.uri)
           const file_name = response.uri
@@ -68,7 +67,7 @@ export default class Cam extends React.Component {
           let ipAddress = this.props.navigation.getParam('ipAddress')
           console.log('CAM state.file_name', this.state.file_name)
 
-          axios.post(`http://192.168.1.254:3001/recVideo`, {
+          axios.post(`http://173.2.1.190:3001/recVideo`, {
             collage_id: collage_id,
             position: position,
             file_name: file_name
@@ -79,6 +78,7 @@ export default class Cam extends React.Component {
               ipAddress: ipAddress }),
            )
         })
+        setInterval(() => this.timer(), 1000);
 
       // else {() => { this.stopRecording() } }
       // this.setState({
@@ -184,7 +184,8 @@ export default class Cam extends React.Component {
           <Camera
             style={ styles.camera }
             type={this.state.type}
-            ref={ref => { this.camera = ref; }}>
+            ref={ref => { this.camera = ref; }}
+            ratio='1:1'>
           </Camera>
           {this.renderBottomBar()}
         </View>
@@ -211,6 +212,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingTop:50,
+    paddingBottom:20,
     // borderWidth:1,
     // borderColor:'red'
   },
@@ -251,6 +253,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingBottom:50,
+    paddingTop:20,
     // borderWidth:1,
     // borderColor:'blue'
   },
